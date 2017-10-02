@@ -15,7 +15,18 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from core.views import main_page
+from core.views import blogs_list
+from core.views import blog
+from core.views import post
+from core.views import profile
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^$', main_page),
+    url(r'^blogs/$', blogs_list),
+    url(r'^blogs/(?P<blogID>\d+)/$', blog),
+    url(r'^blogs/(?P<blogID>[\d\w]+)/(?P<postID>\d+)$', post),
+    url(r'^profile$', profile),
 ]
