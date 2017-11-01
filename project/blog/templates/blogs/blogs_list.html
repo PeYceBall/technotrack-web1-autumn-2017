@@ -2,9 +2,9 @@
 {% block title %}<h1> Список блогов </h1>{% endblock %}
 {% block content %}
     {% for blog in blogs %}
-        <div><a href="{% url 'blog:blog_detail' pk=blog.pk%}">{{ blog.title }}</a>  от {{ blog.owner }}</div>
+        <div><a href="{% url 'blog:blog_detail' pk=blog.pk%}">{{ blog.title }}</a>  от <a href = {% url 'user:user_detail' pk=blog.owner.id%}>{{ blog.owner }}</a></div>
     {% endfor %}
 
-    <p><a href="{% url 'main_page' %}">На главную</a></p>
+    {% include 'to_main_page.html' %}
 {% endblock %}
 

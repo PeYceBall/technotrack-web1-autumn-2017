@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-This is your profile
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}
+    <h2>Профиль</h2>
+{% endblock %}
+{% block content %}
+<p>Вы вошли как: {{user.username}}</p>
+    {% for blog in user.blogs.all %}
+        <p><a href="{% url 'blog:blog_detail' pk=blog.pk %}">{{ blog }}</a></p>
+    {% endfor %}
+    {% include 'to_main_page.html' %}
+{% endblock %}

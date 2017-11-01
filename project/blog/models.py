@@ -8,7 +8,7 @@ from django.conf import settings
 
 class Blog(models.Model):
     title = models.CharField(max_length=255, default='')
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='blogs')
 
     def __unicode__(self):
         return self.title

@@ -18,10 +18,16 @@ from django.contrib import admin
 from core.views import main_page
 from core.views import profile
 from core.views import MainPage
+from django.conf import settings
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', MainPage.as_view(), name='main_page'),
     url(r'^blogs/', include('blog.urls', namespace='blog')),
-    url(r'^profile$', profile, name='profile'),
+    url(r'^', include('core.urls', namespace='user')),
 ]
+
+
+if settings.DEBUG is True:
+    from django.conf.urls.static import static
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

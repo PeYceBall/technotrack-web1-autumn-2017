@@ -10,3 +10,4 @@ urlpatterns = [
     url(r'^[\d]+/(?P<pk>\d+)$', PostDetail.as_view(), name='post_detail'),
     #url(r'^[\d]+/comments/', include('comment.urls', namespace='comment')),
 ]
+

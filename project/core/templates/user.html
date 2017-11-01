@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}
+    <h2>{{ user.username }}</h2>
+{% endblock %}
+{% block content %}
+    <p>Имя: {{ user.first_name }}</p>
+    <p>Фамилия: {{ user.last_name }}</p>
+    <p>О себе: {{ user.description }}</p>
+    <p></p>
+    {% for blog in user.blogs.all %}
+        <p><a href = "{% url 'blog:blog_detail' pk=blog.pk%}">{{ blog }}</a></p>
+    {% endfor %}
+
+    {% include 'to_main_page.html' %}
+{% endblock %}

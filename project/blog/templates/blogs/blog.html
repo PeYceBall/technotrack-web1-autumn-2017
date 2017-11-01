@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
-{%  block title %}<h1> Это блог "{{ blog.title }}" от  {{ blog.owner }}</h1> {% endblock %}
+{%  block title %}<h1> Это блог "{{ blog.title }}" от  <a href = {% url 'user:user_detail' pk=blog.owner.id%}>{{ blog.owner }}</a></h1> {% endblock %}
 
 {% block content %}
     {% for post in blog.posts.all %}
         <div><a href="{% url 'blog:post_detail' pk=post.pk %}">{{post.title}} </a> </div>
     {% endfor %}
 
+    <p><a href="{% url 'blog:blog_list' %}">К списку блогов</a></p>
 {% endblock %}

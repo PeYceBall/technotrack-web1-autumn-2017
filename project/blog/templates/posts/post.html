@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
-{% block title %} Это пост {{ post.title }} в блоге {{ post.blog }} от {{ post.blog.owner }}{% endblock %}
+{% block title %} Это пост {{ post.title }} в блоге <a href = {% url 'blog:blog_detail' pk=post.blog.id%}>{{ post.blog }}</a> от <a href = {% url 'user:user_detail' pk=post.blog.owner.id%}>{{ post.blog.owner }}</a>{% endblock %}
 {% block content %}
     <p>Комментарии</p>
     {% for comment in post.comments.all %}
         <p>
-        <div>{{ comment.author }} написал:</div>
+        <div><a href = {% url 'user:user_detail' pk=comment.author.id%}>{{ comment.author }}</a> написал:</div>
         <div>{{ comment }}</div>
         </p>
     {% endfor %}

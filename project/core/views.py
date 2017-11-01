@@ -2,10 +2,12 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, DetailView
 from blog.models import Blog
 from blog.models import Post
 from comment.models import Comment
+from .models import User
+from django.shortcuts import get_object_or_404
 # Create your views here.
 
 
@@ -26,4 +28,21 @@ class MainPage(TemplateView):
 
 
 def profile(request):
-    return render(request, 'profile.html')
+    user = get_object_or_404(User.objects.filter(id=request.user.id))
+    return render(request, 'profile.html', {'user': user})
+
+
+class UserDetail(DetailView):
+    template_name = 'user.html'
+    model = User
+    context_object_name = 'user'
+
+
+
+# class ProfileView(TemplateView):
+#     template_name = 'profile.html'
+#     context_object_name = 'this_user'
+#
+#     def get_context_data(self, **kwargs):
+#         context = super(ProfileView, self).get_context_data(**kwargs)
+#         return context
