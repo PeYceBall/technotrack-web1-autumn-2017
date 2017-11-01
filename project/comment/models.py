@@ -11,3 +11,6 @@ class Comment(models.Model):
     text = models.TextField(default='')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __unicode__(self):
+        return self.text

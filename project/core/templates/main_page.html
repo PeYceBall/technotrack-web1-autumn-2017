@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h1> This is the main page!</h1>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %} This is the main page! {% endblock %}
+{% block content %}
+    <p><div>Всего блогов: {{ blogsNumber }}</div>
+    <div>Всего постов: {{ postsNumber }}</div>
+    <div>Всего комментариев: {{ commentsNumber }}</div>
+    </p>
+    <div><a href="{% url 'blog:blog_list' %}">Список блогов</a></div>
+{% endblock %}

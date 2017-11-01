@@ -8,11 +8,10 @@ from .models import Post, Blog
 
 @admin.register(Blog)
 class BlogAdmin(admin.ModelAdmin):
-
-    pass
-
+    list_display = 'id', 'title', 'owner'
+    ordering = 'id',
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-
-    pass
+    list_display = 'id', 'title', 'blog'
+    ordering = 'id',

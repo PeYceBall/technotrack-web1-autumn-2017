@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %} Это пост {{ post.title }} в блоге {{ post.blog }} от {{ post.blog.owner }}{% endblock %}
+{% block content %}
+    <p>Комментарии</p>
+    {% for comment in post.comments.all %}
+        <p>
+        <div>{{ comment.author }} написал:</div>
+        <div>{{ comment }}</div>
+        </p>
+    {% endfor %}
+{% endblock %}

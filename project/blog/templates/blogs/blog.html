@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{%  block title %}<h1> Это блог "{{ blog.title }}" от  {{ blog.owner }}</h1> {% endblock %}
+
+{% block content %}
+    {% for post in blog.posts.all %}
+        <div><a href="{% url 'blog:post_detail' pk=post.pk %}">{{post.title}} </a> </div>
+    {% endfor %}
+
+{% endblock %}
