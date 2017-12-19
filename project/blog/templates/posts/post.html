@@ -9,4 +9,5 @@
         <div>{{ comment }}</div>
         </p>
     {% endfor %}
+    <p><a href="{% url 'blog:blog_detail' pk=post.blog.pk%}">Вернуться к блогу {{ post.blog }}</a></p>
 {% endblock %}
