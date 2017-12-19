@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %} Это пост {{ post.title }} в блоге <a href = {% url 'blog:blog_detail' pk=post.blog.id%}>{{ post.blog }}</a> от <a href = {% url 'user:user_detail' pk=post.blog.owner.id%}>{{ post.blog.owner }}</a>{% endblock %}
+{% block content %}
+    <p>{{post.text}}</p>
+    <p>Комментарии</p>
+    {% for comment in post.comments.all %}
+        <p>
+        <div><a href = {% url 'user:user_detail' pk=comment.author.id%}>{{ comment.author }}</a> написал:</div>
+        <div>{{ comment }}</div>
+        </p>
+    {% endfor %}
+    <p><a href="{% url 'blog:blog_detail' pk=post.blog.pk%}">Вернуться к блогу {{ post.blog }}</a></p>
+{% endblock %}
