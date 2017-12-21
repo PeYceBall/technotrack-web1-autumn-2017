@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %} Это пост {{ post.title }} в блоге <a href = {% url 'blog:blog_detail' pk=post.blog.id%}>{{ post.blog }}</a> от <a href = {% url 'user:user_detail' pk=post.blog.owner.id%}>{{ post.blog.owner }}</a>{% endblock %}
+{% block title %}<h1>Это пост "{{ post.title }}" в блоге "<a href = {% url 'blog:blog_detail' pk=post.blog.id%}>{{ post.blog }}</a>" от <a href = {% url 'user:user_detail' pk=post.blog.owner.id%}>{{ post.blog.owner }}</a> </h1> {% endblock %}
 {% block content %}
     <p>{{post.text}}</p>
     <p>Комментарии</p>
@@ -9,5 +9,17 @@
         <div>{{ comment }}</div>
         </p>
     {% endfor %}
+
+    {% if user.is_authenticated %}
+        <form action="" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Прокомментировать"/>
+        </form>
+    {% endif %}
+
+    {% if post.blog.owner == user %}
+    <p><a href="{% url 'blog:post_edit' pk=post.id blog_id=post.blog.id %}">Редактировать</a></p>
+    {% endif %}
     <p><a href="{% url 'blog:blog_detail' pk=post.blog.pk%}">Вернуться к блогу {{ post.blog }}</a></p>
 {% endblock %}

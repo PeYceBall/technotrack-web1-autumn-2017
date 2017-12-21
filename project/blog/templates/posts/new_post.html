@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% if blog.owner != user %}
+        <p>Вы не можете создать пост в этом блоге</p>
+        {% else %}
+        <form action="" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Создать"/>
+        </form>
+    {% endif %}
+
+    <p><a href="{% url 'blog:blog_detail' pk=blog.id %}">Назад</a></p>
+{% endblock %}

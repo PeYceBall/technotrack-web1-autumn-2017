@@ -1,3 +1,16 @@
 {% block title %}{% endblock %}
-{% block content %}{% endblock %}
+{% block greeting %}
+     <p>
+    {% if user.is_authenticated %}
+        Вы зашли как {{ user.username }}.     <div><a href="{% url 'user:logout' %}">Выход</a></div>
+        <br/>
+    {% else%}
+         <div><a href="{% url 'user:login' %}">Войти</a></div>
+         <div><a href="{% url 'user:signup' %}">Зарегистрироваться</a></div>
+    {% endif %}
+
+    </p>
+{% endblock %}
+{% block content %}
+{% endblock %}
 {% block footer %}{% endblock %}

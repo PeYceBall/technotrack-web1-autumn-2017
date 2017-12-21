@@ -6,7 +6,8 @@
     <p>Имя: {{ user.first_name }}</p>
     <p>Фамилия: {{ user.last_name }}</p>
     <p>О себе: {{ user.description }}</p>
-    <p></p>
+    <br/>
+    <p>Блоги:</p>
     {% for blog in user.blogs.all %}
         <p><a href = "{% url 'blog:blog_detail' pk=blog.pk%}">{{ blog }}</a></p>
     {% endfor %}

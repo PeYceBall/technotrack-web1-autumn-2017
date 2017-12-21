@@ -1,10 +1,42 @@
 {% extends 'base.html' %}
 {% block title %}<h1> Список блогов </h1>{% endblock %}
 {% block content %}
-    {% for blog in blogs %}
-        <div><a href="{% url 'blog:blog_detail' pk=blog.pk%}">{{ blog.title }}</a>  от <a href = {% url 'user:user_detail' pk=blog.owner.id%}>{{ blog.owner }}</a></div>
-    {% endfor %}
 
+    <form action="" method="get">
+    {{ sort_form }}
+    <input type="submit" value="Сортировать"/>
+    </form>
+
+    {% for blog in blogs_page %}
+        <div><a href="{% url 'blog:blog_detail' pk=blog.pk%}">{{ blog.title }} ({{ blog.posts.count }} постов)</a>  от <a href = {% url 'user:user_detail' pk=blog.owner.id%}>{{ blog.owner }}</a></div>
+    {% endfor %}
+    <br/>
+
+    <div class="pagination">
+    <span class="step-links">
+        {% if blogs_page.has_previous %}
+            <a href="?page={{ blogs_page.previous_page_number }}">Предыдущая</a>
+        {% endif %}
+
+        <span class="current">
+            Страница {{ blogs_page.number }} из {{ blogs_page.paginator.num_pages }}
+        </span>
+
+        {% if blogs_page.has_next %}
+            <a href="?page={{ blogs_page.next_page_number }}">Следующая</a>
+        {% endif %}
+    </span>
+</div>
+
+<br/>
+
+    {% if user.is_authenticated %}
+    <form action="" method="post">
+    {% csrf_token %}
+    {{ form }}
+        <input type="submit" value="Создать блог"/>
+    </form>
+    {% endif %}
     {% include 'to_main_page.html' %}
 {% endblock %}
 
