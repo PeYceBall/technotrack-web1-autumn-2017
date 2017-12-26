@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'core.apps.CoreConfig',
     'blog.apps.BlogConfig',
     'comment.apps.CommentConfig',
+    'like.apps.LikeConfig',
 ]
 
 MIDDLEWARE = [
@@ -129,7 +130,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-LOGIN_URL = 'login'
+LOGIN_URL = 'user:login'
 
 LOGIN_REDIRECT_URL = "main_page"
 

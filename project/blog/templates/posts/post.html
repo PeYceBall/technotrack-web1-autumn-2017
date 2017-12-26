@@ -21,5 +21,15 @@
     {% if post.blog.owner == user %}
     <p><a href="{% url 'blog:post_edit' pk=post.id blog_id=post.blog.id %}">Редактировать</a></p>
     {% endif %}
+
+    <p>
+    Лайков: {{ like_amount }}
+    <form action="{% url 'blog:like:like' blog_id=post.blog.id pk=post.id %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Лайкнуть"/>
+    </form>
+    </p>
+
+
     <p><a href="{% url 'blog:blog_detail' pk=post.blog.pk%}">Вернуться к блогу {{ post.blog }}</a></p>
 {% endblock %}

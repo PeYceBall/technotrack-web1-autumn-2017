@@ -12,6 +12,7 @@ from django.utils.decorators import method_decorator
 from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Blog, Post
+from like.models import Like
 from comment.models import Comment
 # Create your views here.
 
@@ -135,7 +136,6 @@ class BlogList(CreateView, ListView):
         query_set = super(BlogList, self).get_queryset()
         self.sort_form = BlogSortForm(self.request.GET)
 
-
         if self.sort_form.is_valid():
             print "WOW"
             if self.sort_form.cleaned_data['order_by']:
@@ -156,6 +156,7 @@ class PostDetail(DetailView, CreateView):
     def get_context_data(self, **kwargs):
         context = super(PostDetail, self).get_context_data(**kwargs)
         context['user'] = self.request.user
+        context['like_amount'] = Like.objects.filter(post=self.get_object()).count()
 
         if self.request.method == 'post':
             context['form'] = CommentForm(self.request.POST)

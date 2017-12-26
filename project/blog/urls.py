@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'^(?P<blog_id>\d+)/(?P<pk>\d+)$', PostDetail.as_view(), name='post_detail'),
     url(r'^(?P<pk>\d+)/new_post/$', PostCreate.as_view(), name='post_create'),
     url(r'^(?P<blog_id>\d+)/(?P<pk>\d+)/edit/$', PostUpdate.as_view(), name='post_edit'),
+    url(r'^', include('like.urls', namespace='like')),
     #url(r'^[\d]+/comments/', include('comment.urls', namespace='comment')),
 ]
 
