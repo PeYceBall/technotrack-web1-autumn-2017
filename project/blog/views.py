@@ -14,6 +14,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Blog, Post
 from like.models import Like
 from comment.models import Comment
+from category.models import Category
 # Create your views here.
 
 
@@ -79,8 +80,9 @@ class PostCreate(CreateView):
         return context
 
     def form_valid(self, form):
-        self.success_url = reverse('blog:blog_detail', kwargs={'pk': self.kwargs['pk'], 'blog_id': self.get_object().id})
+        self.success_url = reverse('blog:blog_detail', kwargs={'pk': self.kwargs['pk']})
         form.instance.blog = Blog.objects.get(pk=self.kwargs['pk'])
+        #form.instance.categories = form.cleaned_data['']
         return super(PostCreate, self).form_valid(form)
 
 
@@ -134,16 +136,19 @@ class BlogList(CreateView, ListView):
 
     def get_queryset(self):
         query_set = super(BlogList, self).get_queryset()
-        self.sort_form = BlogSortForm(self.request.GET)
+
 
         if self.sort_form.is_valid():
-            print "WOW"
             if self.sort_form.cleaned_data['order_by']:
                 query_set = query_set.order_by(self.sort_form.cleaned_data['order_by'])
             if self.sort_form.cleaned_data['search']:
                 query_set = query_set.filter(title=self.sort_form.cleaned_data['search'])
 
         return query_set
+
+    def dispatch(self, request, *args, **kwargs):
+        self.sort_form = BlogSortForm(self.request.GET)
+        return super(BlogList, self).dispatch(request, *args, **kwargs)
 
 
 class PostDetail(DetailView, CreateView):
@@ -189,9 +194,16 @@ class BlogSortForm(forms.Form):
     ), required=False)
 
 
-class PostForm(forms.Form):
-    title = forms.CharField()
-    text = forms.CharField(widget=forms.Textarea)
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['title', 'text']
+
+
+    #choices = [(category.name, category.name) for category in Category.objects.all()]
+    #title = forms.CharField()
+    #text = forms.CharField(widget=forms.Textarea)
+    #categories = forms.MultipleChoiceField(choices=choices, required=False)
 
 
 class CommentForm(forms.Form):

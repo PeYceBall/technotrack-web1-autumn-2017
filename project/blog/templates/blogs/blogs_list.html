@@ -1,9 +1,14 @@
 {% extends 'base.html' %}
+{% load widget_tweaks %}
 {% block title %}<h1> Список блогов </h1>{% endblock %}
 {% block content %}
 
     <form action="" method="get">
-    {{ sort_form }}
+{#    {{ sort_form }}#}
+        {% for field in sort_form.visible_fields %}
+            {{ field.label_tag }}
+            {{ field|add_class:"form-sort" }}
+        {% endfor %}
     <input type="submit" value="Сортировать"/>
     </form>
 
@@ -33,7 +38,11 @@
     {% if user.is_authenticated %}
     <form action="" method="post">
     {% csrf_token %}
-    {{ form }}
+{#    {{ form }}#}
+        {% for field in form.visible_fields %}
+            {{ field.label_tag }}
+            {{ field }}
+        {% endfor %}
         <input type="submit" value="Создать блог"/>
     </form>
     {% endif %}

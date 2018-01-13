@@ -1,0 +1,30 @@
+
+body {
+    background-color: lightgrey;
+}
+
+header {margin-top: 20px;}
+header h1 {color: coral;}
+#greeting {margin: 30px;}
+
+nav {margin-top: 20px;}
+.text-centered {text-align: center; }
+.text-left{ text-align: left; }
+.post {
+    border: solid brown;
+    padding: 10px;
+}
+
+.form-input{
+    width: 100%;
+    height: 100px;
+}
+
+.comment-label{
+
+}
+
+.comments{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

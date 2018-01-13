@@ -6,6 +6,7 @@
         <div><a href="{% url 'blog:post_detail' pk=post.pk blog_id=post.blog.id %}">{{post.title}} </a> </div>
     {% endfor %}
 
+    <br/>
     {% if blog.owner == user %}
         <p><a href="{% url 'blog:post_create' pk=blog.id %}"> Новый пост</a></p>
     {% endif %}

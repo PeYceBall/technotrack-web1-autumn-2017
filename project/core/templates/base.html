@@ -1,23 +1,55 @@
+{% load static %}
 <!DOCTYPE html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static "core/base.css" %}?v=1.0.9"/>
 </head>
 <body>
-{% block title %}{% endblock %}
+<header>
+<div class="container">
+    <div class="row text-centered">
+        <div class="col-12">
+            <h1>{% block title %}{% endblock %}</h1>
+        </div>
+    </div>
+</div>
+
+
 {% block greeting %}
-     <p>
+     <div id="greeting">
     {% if user.is_authenticated %}
-        Вы зашли как {{ user.username }}.     <div><a href="{% url 'user:logout' %}">Выход</a></div>
+        <div class="container">
+        <div class="row">
+            <div class="col-lg-3 offset-lg-9 ">Вы зашли как {{ user.username }}.
+                <div><a href="{% url 'user:logout' %}">Выход</a></div></div>
+        </div>
+        </div>
+
         <br/>
-    {% else%}
-         <div><a href="{% url 'user:login' %}">Войти</a></div>
-         <div><a href="{% url 'user:signup' %}">Зарегистрироваться</a></div>
+    {% else %}
+        <div class="container">
+        <div class="row">
+            <div class="col-lg-1 offset-lg-9 "><a href="{% url 'user:login' %}">Войти</a></div>
+            <div class="col-lg-1"><a href="{% url 'user:signup' %}">Зарегистрироваться</a></div>
+        </div>
+        </div>
     {% endif %}
 
-    </p>
+    </div>
 {% endblock %}
-{% block content %}
-{% endblock %}
+</header>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-10 offset-lg-1 col-md-10 offset-md-1">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+</div>
+
+
 {% block footer %}{% endblock %}
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>

@@ -1,12 +1,30 @@
 {% extends 'base.html' %}
+{% block title %}
+    <h1>Создание нового поста в блоге {{ blog.title }}</h1>
+{% endblock %}
 {% block content %}
     {% if blog.owner != user %}
         <p>Вы не можете создать пост в этом блоге</p>
         {% else %}
         <form action="" method="post">
         {% csrf_token %}
-        {{ form }}
+{#        {{ form }}#}
+        <div class="container-fluid">
+            <div class="row">
+                {% for field in form.visible_fields %}
+                <div class="col-8">
+                    {{ field.label }}
+                    {{ field }}
+                </div>
+            {% endfor %}
+
+
+            </div>
+
         <input type="submit" value="Создать"/>
+        </div>
+
+
         </form>
     {% endif %}
 

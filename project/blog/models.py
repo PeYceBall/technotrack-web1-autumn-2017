@@ -18,6 +18,7 @@ class Post(models.Model):
     blog = models.ForeignKey('blog.Blog', related_name='posts')
     title = models.CharField(max_length=255, default='')
     text = models.TextField(default='')
+    categories = models.ManyToManyField('category.Category', related_name='posts')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

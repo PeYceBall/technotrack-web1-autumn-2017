@@ -3,7 +3,6 @@
     <h2>Профиль</h2>
 {% endblock %}
 {% block content %}
-<p>Вы вошли как: {{user.username}}</p>
     {% for blog in user.blogs.all %}
         <span><a href="{% url 'blog:blog_detail' pk=blog.pk %}">{{ blog }}</a></span>
     {% endfor %}

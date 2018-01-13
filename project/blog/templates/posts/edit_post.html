@@ -1,12 +1,28 @@
 {% extends 'base.html' %}
+{% block title %}
+    <h1>Редактирование поста в блоге {{ post.blog.title }}</h1>
+{% endblock %}
 {% block content %}
     {% if post.blog.owner != user %}
         <p>Вы не можете редактировать этот пост</p>
         {% else %}
         <form action="" method="post">
         {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Принять"/>
+        <div class="container-fluid">
+            <div class="row">
+                {% for field in form.visible_fields %}
+                <div class="col-8">
+                    {{ field.label }}
+                    {{ field }}
+                </div>
+            {% endfor %}
+
+
+            </div>
+
+            <input type="submit" value="Принять"/>
+
+        </div>
         </form>
     {% endif %}
 

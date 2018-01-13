@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% block title %} Главная {% endblock %}
 {% block content %}
-    <p><div>Всего блогов: {{ blogsNumber }}</div>
+    <article><div>Всего блогов: {{ blogsNumber }}</div>
     <div>Всего постов: {{ postsNumber }}</div>
     <div>Всего комментариев: {{ commentsNumber }}</div>
-    </p>
-    <div><a href="{% url 'blog:blog_list' %}">Список блогов</a></div>
+    </article>
+    <nav><a href="{% url 'blog:blog_list' %}">Список блогов</a></nav>
 
 {% endblock %}
