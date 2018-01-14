@@ -5,11 +5,22 @@
 
     <form action="" method="get">
 {#    {{ sort_form }}#}
-        {% for field in sort_form.visible_fields %}
-            {{ field.label_tag }}
-            {{ field|add_class:"form-sort" }}
-        {% endfor %}
-    <input type="submit" value="Сортировать"/>
+    <div class="container-fluid">
+        <div class="form-row">
+            {% for field in sort_form.visible_fields %}
+                <div class="col-lg-3 form-group">
+                    {{ field.label_tag }}
+                    {{ field|add_class:"form-sort form-control" }}
+                </div>
+            {% endfor %}
+
+            <p class="col-lg-3 form-control-input">
+                <input type="submit" value="Сортировать" class="sort-button"/>
+            </p>
+        </div>
+    </div>
+
+
     </form>
 
     {% for blog in blogs_page %}
@@ -41,7 +52,7 @@
 {#    {{ form }}#}
         {% for field in form.visible_fields %}
             {{ field.label_tag }}
-            {{ field }}
+            {{ field}}
         {% endfor %}
         <input type="submit" value="Создать блог"/>
     </form>
